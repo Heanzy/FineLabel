@@ -1,9 +1,17 @@
 import QtQuick 2.10
 import QtQuick.Window 2.10
 
-Window {
+Window{
+    id: mainwindow
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Hello World")
+    width: Screen.desktopAvailableWidth;
+    height: Screen.desktopAvailableHeight;
+    title: qsTr("交互标注软件");
+
+    MainInterface{
+        id: mainInterface;
+        anchors.fill: parent;
+
+        visible: ture;
+    }
 }
