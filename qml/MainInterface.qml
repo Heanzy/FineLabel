@@ -3,6 +3,11 @@ import QtQuick 2.0
 Rectangle {
     id: mainInterface;
     color: "#EAEAEA"
+
+    //-----------------------------------------------//
+
+
+    //界面上部红背景色
     Image {
         id: topbackground;
         source: "image/Top background_@2x.png";
@@ -29,7 +34,7 @@ Rectangle {
         }
 
     }
-
+    //界面上部黑背景色
     Image {
         id: topbackground2;
         source: "image/top_@1x.png";
@@ -38,15 +43,18 @@ Rectangle {
         anchors.top: topbackground.bottom;
 
     }
+    //界面左部黑背景色
     Image {
         id: functionalbackground;
         source: "image/Functional background_@1x.png";
         width: 70;
         height: 949;
         anchors.top: topbackground2.bottom;
+        anchors.topMargin: 1;
         anchors.left: parent.left;
 
     }
+    //界面底部黑背景色
     Image {
         id: bottombackground;
         source: "image/bottom_@2x.png";
@@ -56,6 +64,7 @@ Rectangle {
         anchors.left: functionalbackground.right;
 
     }
+    //界面右侧标签列表栏
     Rectangle{
         id: labellist;
         color: "#ffffff"
@@ -90,6 +99,7 @@ Rectangle {
 
         }
     }
+    //界面右侧标签列表栏
     Rectangle{
         id: labellist1;
         color:"#ffffff";
@@ -101,6 +111,7 @@ Rectangle {
         anchors.topMargin: 2;
         anchors.right: parent.right;
     }
+    //界面右侧多边形标签栏
     Rectangle{
         id: polygonlabel;
         color: "#ffffff"
@@ -135,6 +146,7 @@ Rectangle {
 
         }
     }
+    //界面右侧多边形标签栏
     Rectangle{
         id: polygonlabel1;
         color:"#ffffff";
@@ -146,6 +158,7 @@ Rectangle {
         anchors.topMargin: 2;
         anchors.right: parent.right;
     }
+    //界面右侧文件列表栏
     Rectangle{
         id: filelist;
         color: "#ffffff"
@@ -180,6 +193,7 @@ Rectangle {
 
         }
     }
+    //界面右侧文件列表栏
     Rectangle{
         id: filelist1;
         color:"#ffffff";
