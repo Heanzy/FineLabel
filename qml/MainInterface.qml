@@ -50,7 +50,7 @@ Rectangle {
         width: 70;
         height: 949;
         anchors.top: topbackground2.bottom;
-        anchors.topMargin: 1;
+        anchors.topMargin: 0;
         anchors.left: parent.left;
 
     }
@@ -205,5 +205,163 @@ Rectangle {
         anchors.topMargin: 2;
         anchors.right: parent.right;
         anchors.bottom: bottombackground.top;
+    }
+    Column{
+        id: functionalButtonList;
+        anchors.top: topbackground2.bottom;
+        anchors.topMargin: 7;
+        anchors.left: parent.left;
+        width: 70;
+        height: 949;
+
+        spacing: 12;
+
+
+
+        ButtonTool{
+            id: openFileDir;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/路径 631.png";
+            sText: "打开文件夹"
+        }
+
+        ButtonTool{
+            id: openFile;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Open picture_@1x.png"
+            sText:"打开文件"
+        }
+
+        ButtonTool{
+            id: importLabel;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Import_@1x.png";
+            sText: "导入标签库"
+        }
+
+        ButtonTool{
+            id: exportLabel;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/export_@1x.png";
+            sText: "导出标签库"
+        }
+
+        ButtonTool{
+            id: exportFile;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Export image_@1x.png";
+            sText: "导出图片"
+        }
+
+        ButtonTool{
+            id: save;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/save_@1x.png";
+            sText: "保存"
+        }
+
+        ButtonTool{
+            id: createAnchor;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Crop_@1x.png";
+            sText: "创建锚点"
+        }
+
+        ButtonTool{
+            id: edit;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/edit_@1x.png";
+            sText: "编辑"
+        }
+
+        ButtonTool{
+            id: previous;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Previous_@1x.png";
+            sText: "上一张"
+        }
+
+        ButtonTool{
+            id: next;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Next_@1x.png";
+            sText: "下一张"
+        }
+
+        ButtonTool{
+            id: addAnchor;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Add anchor point_@1x.png";
+            sText: "添加锚点"
+        }
+
+        ButtonTool{
+            id: deleteAnchor;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Delete anchor point_@1x.png";
+            sText: "删除锚点"
+        }
+
+        ButtonTool{
+            id: automaticAnnotation;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Automatic labeling_@1x.png";
+            sText: "自动标注"
+        }
+
+        ButtonTool{
+            id: revocation;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/Cancel_@1x.png";
+            sText: "撤销"
+        }
+
+        ButtonTool{
+            id: zoomIn;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/amplification_@1x.png";
+            sText: "放大"
+        }
+
+        ButtonTool{
+            id: zoomOut;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/minifier_@1x.png";
+            sText: "缩小"
+        }
+
+        ButtonTool{
+            id: deletePolygon;
+            height: 40;
+            width: parent.width;
+            sNormalImage:"image/delete_@1x.png";
+            sText: "删除"
+        }
+
+    }
+    Button{
+        id: file;
+        height: 40;
+        width: 40;
+        sText:"文件";
+        anchors.left: parent.left;
+        anchors.leftMargin: 40;
+        horizontalCenter: Text
     }
 }

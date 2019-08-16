@@ -19,12 +19,22 @@ Rectangle{
 
         anchors.horizontalCenter: parent.horizontalCenter;
         anchors.top: parent.top;
-        width: 60;
-        height: 40;
+        width: 20;
+        height: 20;
         source: sNormalImage;
     }
 
     Text{
         id: buttonText
+        anchors.top:buttonImage.bottom;
+        anchors.topMargin: 6;
+        width: parent.width;
+        height: 10;
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
+        color: "#e8e8e8";
+        font.family: "PingFang SC"
+        text: sText;
+        font.pixelSize: 12;
     }
 }

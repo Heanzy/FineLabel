@@ -2,6 +2,6 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/MainInterface.qml</file>
-        <file>qml/button_Tool.qml</file>
+        <file>qml/ButtonTool.qml</file>
     </qresource>
 </RCC>
