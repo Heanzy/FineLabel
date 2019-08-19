@@ -1,5 +1,5 @@
 import QtQuick 2.0
-
+import QtQuick.Controls 1.2
 Rectangle {
     id: mainInterface;
     color: "#EAEAEA"
@@ -50,7 +50,7 @@ Rectangle {
         width: 70;
         height: 949;
         anchors.top: topbackground2.bottom;
-        anchors.topMargin: 0;
+        anchors.topMargin: 1;
         anchors.left: parent.left;
 
     }
@@ -355,13 +355,27 @@ Rectangle {
         }
 
     }
-    Button{
-        id: file;
+    New_Button{
+        id: fileButton;
         height: 40;
-        width: 40;
-        sText:"文件";
+        width: 50;
         anchors.left: parent.left;
+        anchors.top: topbackground.bottom;
+        anchors.topMargin: 5;
         anchors.leftMargin: 40;
-        horizontalCenter: Text
+        anchors.verticalCenter: parent.verticalCenter;
+        sText: "文件"
+    }
+
+    New_Button{
+        id: helpButton;
+        height: 40;
+        width: 50;
+        anchors.left: fileButton.right;
+        anchors.top: topbackground.bottom;
+        anchors.topMargin: 5;
+        anchors.leftMargin: 30;
+        anchors.verticalCenter: parent.verticalCenter;
+        sText: "帮助"
     }
 }
