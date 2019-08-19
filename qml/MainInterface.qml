@@ -10,7 +10,7 @@ Rectangle {
     //界面上部红背景色
     Image {
         id: topbackground;
-        source: "image/Top background_@2x.png";
+        source: "image/Top background_@1x_new.png";
 
         width: 1920;
         height: 90;
@@ -232,6 +232,9 @@ Rectangle {
             width: parent.width;
             sNormalImage:"image/Open picture_@1x.png"
             sText:"打开文件"
+            onBack: {
+               imageShowArea.visible = true;
+            }
         }
 
         ButtonTool{
@@ -377,5 +380,20 @@ Rectangle {
         anchors.leftMargin: 30;
         anchors.verticalCenter: parent.verticalCenter;
         sText: "帮助"
+    }
+    ImageShowArea{
+        id:imageShowArea;
+        width: 1220
+        height: 709
+        anchors.centerIn: parent;
+        anchors.left: functionalbackground.right;
+        anchors.leftMargin: 100;
+        anchors.right: parent.right;
+        anchors.rightMargin: 530;
+        anchors.top: topbackground2.bottom;
+        anchors.topMargin: 100;
+        anchors.bottom: bottombackground.top;
+        anchors.bottomMargin: 100;
+
     }
 }

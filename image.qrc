@@ -66,5 +66,6 @@
         <file>qml/image/top_@2x.png</file>
         <file>qml/image/路径 631.png</file>
         <file>qml/image/组 68.png</file>
+        <file>qml/image/Top background_@1x_new.png</file>
     </qresource>
 </RCC>

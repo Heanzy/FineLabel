@@ -4,5 +4,6 @@
         <file>qml/MainInterface.qml</file>
         <file>qml/ButtonTool.qml</file>
         <file>qml/New_Button.qml</file>
+        <file>qml/ImageShowArea.qml</file>
     </qresource>
 </RCC>

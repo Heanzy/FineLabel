@@ -37,4 +37,14 @@ Rectangle{
         text: sText;
         font.pixelSize: 12;
     }
+    MouseArea{
+        id: buttonMouseArea;
+        anchors.fill: parent;
+
+        acceptedButtons: Qt.LeftButton;
+
+        onReleased: {
+           back(nIndex);
+        }
+    }
 }

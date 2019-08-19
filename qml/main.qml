@@ -12,6 +12,6 @@ Window{
         id: mainInterface;
         anchors.fill: parent;
 
-        visible: ture;
+        visible: true;
     }
 }
