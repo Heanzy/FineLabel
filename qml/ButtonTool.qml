@@ -9,7 +9,7 @@ Rectangle{
     property var sText: "";
     property var nIndex: 0;
 
-    signal back(var nIndex);
+    signal release(var nIndex);
 
     /********************************************/
 
@@ -42,9 +42,38 @@ Rectangle{
         anchors.fill: parent;
 
         acceptedButtons: Qt.LeftButton;
+        onPressed: {
+            buttonTool.state = "pressed"
+        }
 
         onReleased: {
-           back(nIndex);
+          release(nIndex)
         }
     }
+    states:[
+        State{
+            name:"normal";
+            PropertyChanges {
+                target: buttonImage;
+                source:sNormalImage;
+
+            }
+        },
+        State{
+            name:"release";
+            PropertyChanges {
+                target: buttonImage;
+                source:sNormalImage;
+            }
+        },
+        State{
+            name:"pressed";
+            PropertyChanges {
+                target: buttonImage;
+                source:sNormalImage;
+            }
+        }
+
+    ]
+
 }

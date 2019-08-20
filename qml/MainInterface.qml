@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.0
 Rectangle {
     id: mainInterface;
     color: "#EAEAEA"
@@ -232,9 +233,17 @@ Rectangle {
             width: parent.width;
             sNormalImage:"image/Open picture_@1x.png"
             sText:"打开文件"
-            onBack: {
-               imageShowArea.visible = true;
+            onRelease: {
+               if(openFile.state === "pressed"){
+                   fileDialog.open()
+                   console.log("pressed")
+               }
+               else{
+                   imageShowArea.imagecontrol(0)
+                   console.log("Nopressed")
+               }
             }
+
         }
 
         ButtonTool{
@@ -381,11 +390,12 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
         sText: "帮助"
     }
+    //图片显示区域
     ImageShowArea{
         id:imageShowArea;
         width: 1220
         height: 709
-        anchors.centerIn: parent;
+//        anchors.centerIn: parent;
         anchors.left: functionalbackground.right;
         anchors.leftMargin: 100;
         anchors.right: parent.right;
@@ -396,4 +406,23 @@ Rectangle {
         anchors.bottomMargin: 100;
 
     }
+    //图片文件选择窗口
+    FileDialog {
+          id: fileDialog
+          title: "Please choose a file"
+          folder: shortcuts.home
+          nameFilters: ["Photo Files", "Image Files (*.jpg *.png *.gif *.bmp *.ico *.json)", "*.*"]
+          selectMultiple: true;
+          onAccepted: {
+              console.log("You chose: " + fileDialog.fileUrls)
+              var imageFile = new String(fileDialog.fileUrls[0]);
+              imageShowArea.imagePath = imageFile.slice(8);
+              imageShowArea.imagecontrol(1)
+              fileDialog.close();
+          }
+          onRejected: {
+              console.log("Canceled")
+              fileDialog.close();
+          }
+      }
 }
