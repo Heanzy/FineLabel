@@ -4,3 +4,8 @@ ImageHandler::ImageHandler()
 {
 
 }
+
+ImageHandler::~ImageHandler()
+{
+
+}

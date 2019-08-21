@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES +=  \
     cpp/main.cpp \
     cpp/colorimageprovider.cpp \
-    imagehandler.cpp
+    cpp/imagehandler.cpp \
+    cpp/filelist.cpp
 
 RESOURCES += qml.qrc \
     image.qrc
@@ -31,6 +32,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    colorimageprovider.h \
-    imagehandler.h
+HEADERS +=  \
+    cpp/imagehandler.h \
+    cpp/filelist.h
+

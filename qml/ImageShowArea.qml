@@ -16,7 +16,7 @@ Rectangle{
             }
             else {
                 mapImg.visible = false;
-                console.log("图片未显示")
+                console.log("图片未显示");
             }
         }
 

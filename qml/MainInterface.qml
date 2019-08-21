@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.0
+import he.qt.FileList 1.0
 Rectangle {
     id: mainInterface;
     color: "#EAEAEA"
@@ -179,7 +180,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter;
         }
         Text {
-            id: filelisttext;
+            id: filelisttittle;
             text: "文件列表";
             anchors.fill: parent;
             anchors.left: parent.left;
@@ -206,6 +207,25 @@ Rectangle {
         anchors.topMargin: 2;
         anchors.right: parent.right;
         anchors.bottom: bottombackground.top;
+
+        property var sText: "fuck";
+        //与C++通信的文件列表
+        Text {
+            id: fileListText
+            anchors.top:parent.top;
+            text:"fuck";
+            anchors.fill: parent
+            width: parent.width;
+            height: parent.width;
+            color: "black";
+            font.family: "PingFang SC"
+            font.pixelSize: 20;
+        }
+        FileList{
+            id: fileList;
+            anchors.fill: parent
+        }
+
     }
     Column{
         id: functionalButtonList;
@@ -415,9 +435,11 @@ Rectangle {
           selectMultiple: true;
           onAccepted: {
               console.log("You chose: " + fileDialog.fileUrls)
-              var imageFile = new String(fileDialog.fileUrls[0]);
-              imageShowArea.imagePath = imageFile.slice(8);
+//              var imageFile = new String(fileDialog.fileUrls[0]);
+              fileList.string2QVector(fileDialog.fileUrls)
+              imageShowArea.imagePath = fileList.fileList[0];
               imageShowArea.imagecontrol(1)
+              fileListText.text = fileList.printFileUrls();
               fileDialog.close();
           }
           onRejected: {
@@ -425,4 +447,5 @@ Rectangle {
               fileDialog.close();
           }
       }
+
 }
