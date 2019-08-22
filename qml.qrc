@@ -3,7 +3,8 @@
         <file>qml/main.qml</file>
         <file>qml/MainInterface.qml</file>
         <file>qml/ButtonTool.qml</file>
-        <file>qml/New_Button.qml</file>
         <file>qml/ImageShowArea.qml</file>
+        <file>qml/ListUI.qml</file>
+        <file>qml/New_Button.qml</file>
     </qresource>
 </RCC>

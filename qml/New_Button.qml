@@ -8,7 +8,8 @@ Rectangle {
     property var sNormalImage: "";
     property var sText: "";
     property var nIndex: 0;
-
+    property var fontsize:24
+    property var textColor:"#ffffff"
     signal back(var nIndex);
 
     /********************************************/
@@ -23,7 +24,58 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.horizontalCenter: parent.horizontalCenter;
         text: sText;
-        font.pixelSize: 24;
-        color: "#ffffff";
+        font.pixelSize: fontsize;
+        color: textColor;
     }
+    MouseArea{
+        id: buttonMouseArea;
+        anchors.fill: parent;
+
+        acceptedButtons: Qt.LeftButton;
+        onPressed: {
+            buttonTool.state === "pressed" ? buttonTool.state = "hover": buttonTool.state = "pressed";
+        }
+
+        onReleased: {
+          release(nIndex)
+          buttonTool.state = "normal";
+        }
+        onEntered: {
+            if(buttonTool.state === "normal")
+            {
+                buttonTool.state = "hover"
+            }
+        }
+        onExited:
+        {
+            if(buttonTool.state === "hover"){
+                buttonTool.state = "normal";
+            }
+        }
+    }
+    states:[
+        State{
+            name:"normal";
+            PropertyChanges {
+                target: buttonImage;
+                source:sNormalImage;
+
+            }
+        },
+        State{
+            name:"pressed";
+            PropertyChanges {
+                target: buttonImage;
+                source:sPressedImage;
+            }
+        },
+        State{
+            name:"hover";
+            PropertyChanges {
+                target: buttonImage;
+                source:sHoverImage;
+            }
+        }
+
+    ]
 }

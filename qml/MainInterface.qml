@@ -125,7 +125,7 @@ Rectangle {
         anchors.top: labellist1.bottom;
         Image {
             id: polygonimage;
-            source: "image/组 68.png"
+            source: "image/Polygon_@1x.png"
             width: 20;
             height: 20
             anchors.left: parent.left;
@@ -207,25 +207,28 @@ Rectangle {
         anchors.topMargin: 2;
         anchors.right: parent.right;
         anchors.bottom: bottombackground.top;
-
-        property var sText: "fuck";
-        //与C++通信的文件列表
-        Text {
-            id: fileListText
-            anchors.top:parent.top;
-            text:"fuck";
-            anchors.fill: parent
-            width: parent.width;
-            height: parent.width;
-            color: "black";
-            font.family: "PingFang SC"
-            font.pixelSize: 20;
+        ListUI{
+            id:list;
+            anchors.fill: parent;
+            anchors.top: parent.top;
         }
+
+//        Text {
+//            id: fileListText
+//            anchors.top:parent.top;
+//            text:"";
+//            anchors.fill: parent
+//            width: parent.width;
+//            height: parent.width;
+//            color: "black";
+//            font.family: "PingFang SC"
+//            font.pixelSize: 15;
+//        }
+        //与C++通信的文件列表
         FileList{
             id: fileList;
             anchors.fill: parent
         }
-
     }
     Column{
         id: functionalButtonList;
@@ -243,7 +246,9 @@ Rectangle {
             id: openFileDir;
             height: 40;
             width: parent.width;
-            sNormalImage:"image/路径 631.png";
+            sNormalImage:"image/Open file_@1x.png";
+            sPressedImage: "image/Open file1_@1x.png";
+            sHoverImage: "image/Open file1_@1x.png";
             sText: "打开文件夹"
         }
 
@@ -252,6 +257,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Open picture_@1x.png"
+            sPressedImage:"image/Open picture1_@1x.png"
+            sHoverImage:"image/Open picture1_@1x.png"
             sText:"打开文件"
             onRelease: {
                if(openFile.state === "pressed"){
@@ -271,6 +278,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Import_@1x.png";
+            sPressedImage:"image/Import1_@1x.png";
+            sHoverImage:"image/Import1_@1x.png";
             sText: "导入标签库"
         }
 
@@ -279,6 +288,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/export_@1x.png";
+            sPressedImage:"image/export1_@1x.png";
+            sHoverImage:"image/export1_@1x.png";
             sText: "导出标签库"
         }
 
@@ -287,6 +298,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Export image_@1x.png";
+            sPressedImage:"image/Export image1_@1x.png";
+            sHoverImage:"image/Export image1_@1x.png";
             sText: "导出图片"
         }
 
@@ -295,6 +308,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/save_@1x.png";
+            sPressedImage:"image/save1_@1x.png";
+            sHoverImage:"image/save1_@1x.png";
             sText: "保存"
         }
 
@@ -303,6 +318,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Crop_@1x.png";
+            sPressedImage:"image/Crop1_@1x.png";
+            sHoverImage:"image/Crop1_@1x.png";
             sText: "创建锚点"
         }
 
@@ -311,6 +328,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/edit_@1x.png";
+            sPressedImage:"image/edit1_@1x.png";
+            sHoverImage:"image/edit1_@1x.png";
             sText: "编辑"
         }
 
@@ -319,7 +338,16 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Previous_@1x.png";
+            sPressedImage:"image/Previous1_@1x.png";
+            sHoverImage:"image/Previous1_@1x.png";
             sText: "上一张"
+            onRelease: {
+                fileList.fileIndex -= 1;
+                if(fileList.fileIndex < 0){
+                    fileList.fileIndex = fileList.sizeOffileList - 1;
+                }
+                    imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+            }
         }
 
         ButtonTool{
@@ -327,7 +355,16 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Next_@1x.png";
+            sPressedImage:"image/Next1_@1x.png";
+            sHoverImage:"image/Next1_@1x.png";
             sText: "下一张"
+            onRelease: {
+                fileList.fileIndex += 1;
+                if(fileList.fileIndex > fileList.sizeOffileList - 1){
+                    fileList.fileIndex = 0
+                }
+                imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+            }
         }
 
         ButtonTool{
@@ -335,6 +372,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Add anchor point_@1x.png";
+            sPressedImage:"image/Add anchor point1_@1x.png";
+            sHoverImage:"image/Add anchor point1_@1x.png";
             sText: "添加锚点"
         }
 
@@ -343,6 +382,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Delete anchor point_@1x.png";
+            sPressedImage:"image/Delete anchor point1_@1x.png";
+            sHoverImage:"image/Delete anchor point1_@1x.png";
             sText: "删除锚点"
         }
 
@@ -351,6 +392,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Automatic labeling_@1x.png";
+            sPressedImage:"image/Automatic labeling1_@1x.png";
+            sHoverImage:"image/Automatic labeling1_@1x.png";
             sText: "自动标注"
         }
 
@@ -359,6 +402,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/Cancel_@1x.png";
+            sPressedImage:"image/Cancel1_@1x.png";
+            sHoverImage:"image/Cancel1_@1x.png";
             sText: "撤销"
         }
 
@@ -367,6 +412,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/amplification_@1x.png";
+            sPressedImage:"image/amplification1_@1x.png";
+            sHoverImage:"image/amplification1_@1x.png";
             sText: "放大"
         }
 
@@ -375,6 +422,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/minifier_@1x.png";
+            sPressedImage:"image/minifier1_@1x.png";
+            sHoverImage:"image/minifier1_@1x.png";
             sText: "缩小"
         }
 
@@ -383,6 +432,8 @@ Rectangle {
             height: 40;
             width: parent.width;
             sNormalImage:"image/delete_@1x.png";
+            sPressedImage:"image/delete1_@1x.png";
+            sHoverImage:"image/delete1_@1x.png";
             sText: "删除"
         }
 
@@ -417,13 +468,13 @@ Rectangle {
         height: 709
 //        anchors.centerIn: parent;
         anchors.left: functionalbackground.right;
-        anchors.leftMargin: 100;
+//        anchors.leftMargin: 100;
         anchors.right: parent.right;
-        anchors.rightMargin: 530;
+        anchors.rightMargin: 430;
         anchors.top: topbackground2.bottom;
-        anchors.topMargin: 100;
+//        anchors.topMargin: 100;
         anchors.bottom: bottombackground.top;
-        anchors.bottomMargin: 100;
+//        anchors.bottomMargin: 100;
 
     }
     //图片文件选择窗口
@@ -437,9 +488,13 @@ Rectangle {
               console.log("You chose: " + fileDialog.fileUrls)
 //              var imageFile = new String(fileDialog.fileUrls[0]);
               fileList.string2QVector(fileDialog.fileUrls)
-              imageShowArea.imagePath = fileList.fileList[0];
+              imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
               imageShowArea.imagecontrol(1)
-              fileListText.text = fileList.printFileUrls();
+              //fileListText.text = fileList.printFileUrls();
+              for(var i = 0;i < fileList.sizeOffileList; i++){
+                  list.createListButton(fileList.fileList[i]);
+              }
+
               fileDialog.close();
           }
           onRejected: {

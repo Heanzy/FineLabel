@@ -1,31 +1,49 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/image/(1).DS_Store</file>
-        <file>qml/image/.DS_Store</file>
         <file>qml/image/Add anchor point_@1x.png</file>
         <file>qml/image/Add anchor point_@2x.png</file>
+        <file>qml/image/Add anchor point1_@1x.png</file>
+        <file>qml/image/Add anchor point1_@2x.png</file>
         <file>qml/image/amplification_@1x.png</file>
         <file>qml/image/amplification_@2x.png</file>
+        <file>qml/image/amplification1_@1x.png</file>
+        <file>qml/image/amplification1_@2x.png</file>
         <file>qml/image/Automatic labeling_@1x.png</file>
         <file>qml/image/Automatic labeling_@2x.png</file>
+        <file>qml/image/Automatic labeling1_@1x.png</file>
+        <file>qml/image/Automatic labeling1_@2x.png</file>
         <file>qml/image/bottom_@1x.png</file>
         <file>qml/image/bottom_@2x.png</file>
         <file>qml/image/Cancel_@1x.png</file>
         <file>qml/image/Cancel_@2x.png</file>
+        <file>qml/image/Cancel1_@1x.png</file>
+        <file>qml/image/Cancel1_@2x.png</file>
         <file>qml/image/close_@1x.png</file>
         <file>qml/image/close_@2x.png</file>
         <file>qml/image/Crop_@1x.png</file>
         <file>qml/image/Crop_@2x.png</file>
+        <file>qml/image/Crop1_@1x.png</file>
+        <file>qml/image/Crop1_@2x.png</file>
         <file>qml/image/Delete anchor point_@1x.png</file>
         <file>qml/image/Delete anchor point_@2x.png</file>
+        <file>qml/image/Delete anchor point1_@1x.png</file>
+        <file>qml/image/Delete anchor point1_@2x.png</file>
         <file>qml/image/delete_@1x.png</file>
         <file>qml/image/delete_@2x.png</file>
+        <file>qml/image/delete1_@1x.png</file>
+        <file>qml/image/delete1_@2x.png</file>
         <file>qml/image/edit_@1x.png</file>
         <file>qml/image/edit_@2x.png</file>
+        <file>qml/image/edit1_@1x.png</file>
+        <file>qml/image/edit1_@2x.png</file>
         <file>qml/image/Export image_@1x.png</file>
         <file>qml/image/Export image_@2x.png</file>
+        <file>qml/image/Export image1_@1x.png</file>
+        <file>qml/image/Export image1_@2x.png</file>
         <file>qml/image/export_@1x.png</file>
         <file>qml/image/export_@2x.png</file>
+        <file>qml/image/export1_@1x.png</file>
+        <file>qml/image/export1_@2x.png</file>
         <file>qml/image/File menu_@1x.png</file>
         <file>qml/image/File menu_@2x.png</file>
         <file>qml/image/File selection_@1x.png</file>
@@ -36,6 +54,8 @@
         <file>qml/image/Functional background_@2x.png</file>
         <file>qml/image/Import_@1x.png</file>
         <file>qml/image/Import_@2x.png</file>
+        <file>qml/image/Import1_@1x.png</file>
+        <file>qml/image/Import1_@2x.png</file>
         <file>qml/image/label_@1x.png</file>
         <file>qml/image/label_@2x.png</file>
         <file>qml/image/left line_@1x.png</file>
@@ -46,26 +66,39 @@
         <file>qml/image/maximize_@2x.png</file>
         <file>qml/image/minifier_@1x.png</file>
         <file>qml/image/minifier_@2x.png</file>
+        <file>qml/image/minifier1_@1x.png</file>
+        <file>qml/image/minifier1_@2x.png</file>
         <file>qml/image/minimize_@1x.png</file>
         <file>qml/image/minimize_@2x.png</file>
         <file>qml/image/Next_@1x.png</file>
         <file>qml/image/Next_@2x.png</file>
+        <file>qml/image/Next1_@1x.png</file>
+        <file>qml/image/Next1_@2x.png</file>
+        <file>qml/image/Open file_@1x.png</file>
         <file>qml/image/Open file_@2x.png</file>
+        <file>qml/image/Open file1_@1x.png</file>
+        <file>qml/image/Open file1_@2x.png</file>
         <file>qml/image/Open picture_@1x.png</file>
         <file>qml/image/Open picture_@2x.png</file>
+        <file>qml/image/Open picture1_@1x.png</file>
+        <file>qml/image/Open picture1_@2x.png</file>
+        <file>qml/image/Polygon_@1x.png</file>
         <file>qml/image/Polygon_@2x.png</file>
         <file>qml/image/Previous_@1x.png</file>
         <file>qml/image/Previous_@2x.png</file>
+        <file>qml/image/Previous1_@1x.png</file>
+        <file>qml/image/Previous1_@2x.png</file>
         <file>qml/image/Right background_@1x.png</file>
         <file>qml/image/Right background_@2x.png</file>
         <file>qml/image/save_@1x.png</file>
         <file>qml/image/save_@2x.png</file>
+        <file>qml/image/save1_@1x.png</file>
+        <file>qml/image/save1_@2x.png</file>
         <file>qml/image/Top background_@1x.png</file>
+        <file>qml/image/Top background_@1x_new.png</file>
         <file>qml/image/Top background_@2x.png</file>
         <file>qml/image/top_@1x.png</file>
         <file>qml/image/top_@2x.png</file>
-        <file>qml/image/路径 631.png</file>
-        <file>qml/image/组 68.png</file>
-        <file>qml/image/Top background_@1x_new.png</file>
+        <file>qml/image/微信图片_20190822104816.jpg</file>
     </qresource>
 </RCC>
