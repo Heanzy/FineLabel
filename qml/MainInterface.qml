@@ -212,6 +212,7 @@ Rectangle {
             anchors.fill: parent;
             anchors.top: parent.top;
             imageShowArea: imageShowArea;
+            fileList: fileList;
         }
 
 //        Text {
@@ -347,7 +348,8 @@ Rectangle {
                 if(fileList.fileIndex < 0){
                     fileList.fileIndex = fileList.sizeOffileList - 1;
                 }
-                    imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+//                    imageShowArea.imagePath = fileList.fileList[fileList.fil eIndex];
+                list.children[fileList.fileIndex].release(fileList.fileIndex);
             }
         }
 
@@ -364,7 +366,8 @@ Rectangle {
                 if(fileList.fileIndex > fileList.sizeOffileList - 1){
                     fileList.fileIndex = 0
                 }
-                imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+//                imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+                list.children[fileList.fileIndex].release(fileList.fileIndex);
             }
         }
 
@@ -416,6 +419,9 @@ Rectangle {
             sPressedImage:"image/amplification1_@1x.png";
             sHoverImage:"image/amplification1_@1x.png";
             sText: "放大"
+            onRelease: {
+                imageShowArea.zoomIn();
+            }
         }
 
         ButtonTool{
@@ -426,6 +432,9 @@ Rectangle {
             sPressedImage:"image/minifier1_@1x.png";
             sHoverImage:"image/minifier1_@1x.png";
             sText: "缩小"
+            onRelease: {
+                imageShowArea.zoomOut();
+            }
         }
 
         ButtonTool{
@@ -492,6 +501,7 @@ Rectangle {
               imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
               imageShowArea.imagecontrol(1)
               //fileListText.text = fileList.printFileUrls();
+              list.destroyListButton();
               for(var i = 0;i < fileList.sizeOffileList; i++){
                   list.createListButton(fileList.fileList[i]);
               }

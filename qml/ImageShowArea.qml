@@ -19,6 +19,12 @@ Rectangle{
                 console.log("图片未显示");
             }
         }
+        function zoomIn(){
+            mapImg.scale = mapImg.scale/0.9;
+        }
+        function zoomOut(){
+            mapImg.scale = mapImg.scale*0.9;
+        }
 
         Image {
             id: mapImg

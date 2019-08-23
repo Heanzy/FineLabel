@@ -23,6 +23,7 @@ Rectangle{
     }
     function imageChange(nIndex){
         imageShowArea.imagePath = fileList.fileList[nIndex];
+        fileList.fileIndex = nIndex;
     }
 
     function createListButton(sText,imagePath){
@@ -43,7 +44,15 @@ Rectangle{
              createListButton();
          }
      }
-
+    function destroyListButton(){
+        if(list.component !=null){
+            for(var i = 0 ;i < list.count ; ++i){
+                list.children[i].destroy();
+            }
+            list.count = 0;
+            list.component = null;
+        }
+    }
 
 
 
