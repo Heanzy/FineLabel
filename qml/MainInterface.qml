@@ -211,6 +211,7 @@ Rectangle {
             id:list;
             anchors.fill: parent;
             anchors.top: parent.top;
+            imageShowArea: imageShowArea;
         }
 
 //        Text {
