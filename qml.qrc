@@ -7,5 +7,6 @@
         <file>qml/ListUI.qml</file>
         <file>qml/New_Button.qml</file>
         <file>qml/New_button1.qml</file>
+        <file>qml/New_Cnavas.qml</file>
     </qresource>
 </RCC>
