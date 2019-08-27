@@ -476,6 +476,7 @@ Rectangle {
         id:imageShowArea;
         width: 1220
         height: 709
+        fileList: fileList;
 //        anchors.centerIn: parent;
         anchors.left: functionalbackground.right;
 //        anchors.leftMargin: 100;
@@ -522,7 +523,7 @@ Rectangle {
               for(var i = 0;i < fileList.sizeOffileList; i++){
                   list.createListButton(fileList.fileList[i]);
               }
-
+              imageShowArea.initTemporary();
               fileDialog.close();
           }
           onRejected: {

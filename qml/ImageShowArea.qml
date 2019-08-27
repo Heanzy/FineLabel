@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import he.qt.ImageItem 1.0
+import he.qt.FileList 1.0
 Rectangle{
         id: mapItemArea
         clip: true
@@ -16,6 +17,7 @@ Rectangle{
         property var positionY;
         property ImageItem imageItem;
         property var temporary:[];
+        property FileList fileList;//三维数组，第一位文件下标
         function imagecontrol(nIndex){
             if(nIndex == 1){
                 mainCanvas.visible = true;
@@ -31,6 +33,11 @@ Rectangle{
         }
         function zoomOut(){
             mainCanvas.scale = mainCanvas.scale*0.9;
+        }
+        function initTemporary(){
+            for(var i =0 ; i < fileList.sizeOffileList; i++){
+                temporary[i] = [];
+            }
         }
 
         Image {
@@ -50,16 +57,24 @@ Rectangle{
             visible: false;
             contextType: "2d"
             scale: 2;
+            focus: true;
+            Keys.enabled: true;
+            Keys.onEscapePressed: {
+                temporary[fileList.fileIndex]=[];
+                console.log("temporary",temporary[fileList.fileIndex]);
+                mainCanvas.requestPaint();
+            }
+
             onPaint: {
                 context.drawImage(mapImg,0,0,mapImg.width,mapImg.height);
                 context.lineWidth = 2;
                 context.strokeStyle = "red";
                 context.beginPath();
-                for(var i = 0; i<temporary.length -1;i++){
-                    context.moveTo(temporary[i][0],temporary[i][1]);
-                    context.lineTo(temporary[i+1][0],temporary[i+1][1]);
+                for(var i = 0; i<temporary[fileList.fileIndex].length -1;i++){
+                    context.moveTo(temporary[fileList.fileIndex][i][0],temporary[fileList.fileIndex][i][1]);
+                    context.lineTo(temporary[fileList.fileIndex][i+1][0],temporary[fileList.fileIndex][i+1][1]);
                 }
-                context.moveTo(temporary[temporary.length -1][0],temporary[temporary.length -1][1])
+                context.moveTo(temporary[fileList.fileIndex][temporary[fileList.fileIndex].length -1][0],temporary[fileList.fileIndex][temporary[fileList.fileIndex].length -1][1])
                 context.lineTo(positionX,positionY);
                 context.stroke();
             }
@@ -91,19 +106,19 @@ Rectangle{
                     }
                 }
                 onPressed: {
-                    temporary.push([mapDragArea.mouseX,mapDragArea.mouseY]);
+                    temporary[fileList.fileIndex].push([mapDragArea.mouseX,mapDragArea.mouseY]);
                     mainCanvas.requestPaint();
                 }
                 onPositionChanged: {
                     positionX = mapDragArea.mouseX;
                     positionY = mapDragArea.mouseY;
-                    console.log("当前坐标",mouseX,mouseY)
-                    mainCanvas.requestPaint()//当鼠标press位置改变  完成当前绘制
+//                    console.log("当前坐标",mouseX,mouseY)
+                    mainCanvas.requestPaint()
                 }
                 onEntered: {
                     positionX = mapDragArea.mouseX;
                     positionY = mapDragArea.mouseY;
-                    mainCanvas.requestPaint()//当鼠标press位置改变  完成当前绘制
+                    mainCanvas.requestPaint()
                 }
             }
         }
