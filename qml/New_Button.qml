@@ -57,23 +57,23 @@ Rectangle {
         State{
             name:"normal";
             PropertyChanges {
-                target: buttonImage;
-                source:sNormalImage;
+                target: buttonText;
+                color:textColor;
 
             }
         },
         State{
             name:"pressed";
             PropertyChanges {
-                target: buttonImage;
-                source:sPressedImage;
+                target: buttonText;
+                color:"red";
             }
         },
         State{
             name:"hover";
             PropertyChanges {
-                target: buttonImage;
-                source:sHoverImage;
+                target: buttonText;
+                color:"red";
             }
         }
 

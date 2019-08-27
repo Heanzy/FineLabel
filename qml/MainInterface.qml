@@ -487,6 +487,23 @@ Rectangle {
 //        anchors.bottomMargin: 100;
 
     }
+//    New_Cnavas {
+//        id:mainCanvas;
+//        visible: true
+//        width: 1220
+//        height: 709
+
+//        //        anchors.centerIn: parent;
+//        anchors.left: functionalbackground.right;
+//        //        anchors.leftMargin: 100;
+//        anchors.right: parent.right;
+//        anchors.rightMargin: 430;
+//        anchors.top: topbackground2.bottom;
+//        //        anchors.topMargin: 100;
+//        anchors.bottom: bottombackground.top;
+//        //        anchors.bottomMargin: 100;
+
+//    }
     //图片文件选择窗口
     FileDialog {
           id: fileDialog
