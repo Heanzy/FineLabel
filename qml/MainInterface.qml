@@ -8,16 +8,17 @@ Rectangle {
 
     //-----------------------------------------------//
 
-
     //界面上部红背景色
     Image {
         id: topbackground;
         source: "image/Top background_@1x_new.png";
 
-        width: 1920;
+        width: parent.width;
         height: 90;
 
         anchors.top: parent.top;
+
+
         Text {
             id: toptittle;
             text: "交互标注软件";
@@ -40,7 +41,7 @@ Rectangle {
     Image {
         id: topbackground2;
         source: "image/top_@1x.png";
-        width: 1920;
+        width: parent.width;
         height: 40;
         anchors.top: topbackground.bottom;
 
