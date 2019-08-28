@@ -100,5 +100,13 @@
         <file>qml/image/top_@1x.png</file>
         <file>qml/image/top_@2x.png</file>
         <file>qml/image/微信图片_20190822104816.jpg</file>
+        <file>qml/image/label_button@1x.png</file>
+        <file>qml/image/label_button@2x.png</file>
+        <file>qml/image/circle_@1x.png</file>
+        <file>qml/image/circle_@2x.png</file>
+        <file>qml/image/default_@1x.png</file>
+        <file>qml/image/default_@2x.png</file>
+        <file>qml/image/draw_@1x.png</file>
+        <file>qml/image/draw_@2x.png</file>
     </qresource>
 </RCC>

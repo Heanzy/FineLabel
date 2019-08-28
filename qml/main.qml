@@ -9,14 +9,22 @@ Window{
 //    property int originwidth: 1920
 //    property int originheight: 1080
     title: qsTr("交互标注软件");
-    ScrollView{
-        id:scroll;
-        anchors.fill:parent;
-        MainInterface{
-            id: mainInterface;
-            width:mainwindow.width;
-            height:1080
-            visible: true;
-        }
-    }
+//    ScrollView{
+//        id:scroll;
+//        anchors.fill:parent;
+//        MainInterface{
+//            id: mainInterface;
+//            Keys.enabled: true;
+//            focus: true;
+//            width:mainwindow.width;
+//            height:1080
+//            visible: true;
+//        }
+//    }
+    MainInterface{
+                id: mainInterface;
+                width:mainwindow.width;
+                height:1080
+                visible: true;
+            }
 }

@@ -8,5 +8,6 @@
         <file>qml/New_Button.qml</file>
         <file>qml/New_button1.qml</file>
         <file>qml/New_Cnavas.qml</file>
+        <file>qml/New_Button2.qml</file>
     </qresource>
 </RCC>
