@@ -19,9 +19,9 @@ Rectangle{
         id:buttonImage;
 
         anchors.horizontalCenter: parent.horizontalCenter;
-        anchors.top: parent.top;
-        width: 20;
-        height: 20;
+        anchors.verticalCenter: parent.verticalCenter;
+        //width: 20;
+        //height: 20;
         source: sNormalImage;
     }
 
@@ -44,6 +44,7 @@ Rectangle{
     MouseArea{
         id: buttonMouseArea;
         anchors.fill: parent;
+        hoverEnabled: true
 
         acceptedButtons: Qt.LeftButton;
         onPressed: {

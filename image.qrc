@@ -108,5 +108,11 @@
         <file>qml/image/default_@2x.png</file>
         <file>qml/image/draw_@1x.png</file>
         <file>qml/image/draw_@2x.png</file>
+        <file>qml/image/close2_@1x.png</file>
+        <file>qml/image/close2_@2x.png</file>
+        <file>qml/image/maximize2_@1x.png</file>
+        <file>qml/image/maximize2_@2x.png</file>
+        <file>qml/image/minimize2_@1x.png</file>
+        <file>qml/image/minimize2_@2x.png</file>
     </qresource>
 </RCC>

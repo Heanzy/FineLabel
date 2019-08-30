@@ -10,5 +10,6 @@
         <file>qml/New_Cnavas.qml</file>
         <file>qml/New_Button2.qml</file>
         <file>qml/LabelInterface.qml</file>
+        <file>qml/Menu_button_top.qml</file>
     </qresource>
 </RCC>

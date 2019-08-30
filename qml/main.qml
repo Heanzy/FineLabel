@@ -21,9 +21,10 @@ Window{
 //            visible: true;
 //        }
 //    }
+
     MainInterface{
                 id: mainInterface;
-                width:mainwindow.width;
+                width:1920;
                 height:1080
                 visible: true;
             }

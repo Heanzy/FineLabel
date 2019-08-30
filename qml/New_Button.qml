@@ -19,10 +19,10 @@ Rectangle {
     Text{
         id: buttonText;
         anchors.fill: parent;
-        horizontalAlignment: Text.horizontalCenter;
-        verticalAlignment: Text.verticalCenter;
-        anchors.verticalCenter: parent.verticalCenter;
-        anchors.horizontalCenter: parent.horizontalCenter;
+        x:0
+        y:0
+        horizontalAlignment: Text.AlignHCenter;
+        verticalAlignment: Text.AlignVCenter;
         text: sText;
         font.pixelSize: fontsize;
         color: textColor;
@@ -33,6 +33,7 @@ Rectangle {
 
         acceptedButtons: Qt.LeftButton;
         onPressed: {
+            menuAllMouseArea.visible = true;
             new_Button.state === "pressed" ? new_Button.state = "hover": new_Button.state = "pressed";
         }
 
