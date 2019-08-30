@@ -21,6 +21,24 @@ Rectangle{
         }
 
     }
+    function hideButton(nIndex){
+        for(var i =0 ; i < fileList.sizeOffileList; i++){
+            for(var j =0;j < imageShowArea.polygonCount[i];j++){
+                if(imageShowArea.buttonList[i][j].length){
+                        for(var k in imageShowArea.buttonList[i][j]){
+                            if(i == nIndex){
+                                console.log("显示按钮")
+                                imageShowArea.buttonList[i][j][k].visible = true;
+                            }
+                            else{
+                                imageShowArea.buttonList[i][j][k].visible = false;
+                            }
+                        }
+                }
+            }
+        }
+    }
+
     function imageChange(nIndex){
         imageShowArea.imagePath = fileList.fileList[nIndex];
         fileList.fileIndex = nIndex;
@@ -36,6 +54,7 @@ Rectangle{
             newButton = list.component.createObject(list,{"textColor":"black","fontsize":16,"x":0,"y":list.count*16,"sText":sText,"width":430,"height":16,"nIndex":list.count});
             newButton.release.connect(list.buttonControl);
             newButton.release.connect(list.imageChange);
+            newButton.release.connect(list.hideButton);
         }
         list.count++;
     }

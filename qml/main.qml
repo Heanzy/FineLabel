@@ -10,6 +10,7 @@ Window{
     height: 1080*0.7;
     title: qsTr("交互标注软件");
 
+
     ScrollView{
         id:scroll;
 //        width: 1920;
@@ -29,4 +30,5 @@ Window{
 //        visible: true;
 //    }
     }
+
 }
