@@ -515,6 +515,7 @@ Rectangle {
           onAccepted: {
               console.log("You chose: " + fileDialog.fileUrls)
 //              var imageFile = new String(fileDialog.fileUrls[0]);
+              imageShowArea.destroyTemporary();
               fileList.string2QVector(fileDialog.fileUrls)
               imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
               imageShowArea.imagecontrol(1)

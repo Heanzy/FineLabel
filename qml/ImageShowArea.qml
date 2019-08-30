@@ -9,20 +9,24 @@ Rectangle{
 
         property var nIndex: 0;
         property var imagePath: "";
-//        property var canvasLastX;
-//        property var canvasLastY;
+//        property var canvaslastX[fileList.fileIndex];
+//        property var canvaslastY[fileList.fileIndex];
 //        property var currentX;
 //        property var currentY;
         property var positionX;//鼠标x位置
         property var positionY;//鼠标y位置
-        property var lastX;//最后一个按钮x位置
-        property var lastY;//最后一个按钮y位置
+//        property var lastX[fileList.fileIndex];//最后一个按钮x位置
+//        property var lastY[fileList.fileIndex];//最后一个按钮y位置
         property ImageItem imageItem;
         property var temporary:[];
         property FileList fileList;//三维数组，第一位文件下标
-        property var polygonCount:1;
+        property var polygonCount:[];
         property var buttonList:[];
-        property Component component:null;
+        property var isPathClosed:[];
+        property var isDynamicline:[]
+        property var lastX: [];
+        property var lastY: [];
+//        property Component component:null;
         function imagecontrol(nIndex){
             if(nIndex == 1){
                 mainCanvas.visible = true;
@@ -42,24 +46,51 @@ Rectangle{
         function initTemporary(){
             for(var i =0 ; i < fileList.sizeOffileList; i++){
                 temporary[i] = [];
-                buttonList[i] = []
+                buttonList[i] = [];
+                polygonCount[i] = 1;
+                lastX = [];
+                lastY = [];
                 for(var j =0;j < 20;j++){
                     temporary[i][j]=[];
                     buttonList[i][j]=[];
                 }
             }
+            for(var m =0;m < 20;m++){
+                isPathClosed[m] = false;
+            }
         }
+        function destroyTemporary(){
+            for(var i =0 ; i < fileList.sizeOffileList; i++){
+                for(var j =0;j < polygonCount[i];j++){
+                    if(buttonList[i][j].length){
+                        for(var k in buttonList[i][j]){
+                            console.log("销毁按钮")
+                            buttonList[i][j][k].destroy();
+                        }
+                    }
+                }
+            }
+
+        }
+
         function createListButton(x,y){
-            if(mapItemArea.component == null){
-                mapItemArea.component = Qt.createComponent("New_Button2.qml");
+            if(mainCanvas.component == null){
+                mainCanvas.component = Qt.createComponent("New_Button2.qml");
             }
             var newButton;
-            if(mapItemArea.component.status == Component.Ready){
+            if(mainCanvas.component.status == Component.Ready){
                 console.log("开始创建按钮对象for imageshowarea");
-                newButton = mapItemArea.component.createObject(mapItemArea,{"x":x,"y":y,"width":4,"height":4});
-                buttonList[fileList.fileIndex][polygonCount-1].push(newButton);
+                newButton = mainCanvas.component.createObject(mainCanvas,{"x":x-1,"y":y-1,"width":2,"height":2,"nIndex":polygonCount[fileList.fileIndex]-1});
+                buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push(newButton);
+                if(buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length == 1){
+                    buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0].release.connect(closePath);
+                }
             }
         }
+        function closePath(nIndex){
+            isPathClosed[nIndex] = true;
+        }
+
         Image {
             id: mapImg
 
@@ -85,10 +116,18 @@ Rectangle{
             contextType: "2d"
             focus: true;
             Keys.enabled: true;
+            property Component component:null;
             Keys.onEscapePressed: {
-                temporary[fileList.fileIndex]=[];
+                temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1] = [];
+                for (var i in buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1]){
+                    buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][i].destroy();
+                }
+                buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1]= [];
+                lastX[fileList.fileIndex] = null;
+                lastY[fileList.fileIndex] = null;
                 console.log("temporary",temporary[fileList.fileIndex]);
                 mainCanvas.requestPaint();
+
             }
 
             onPaint: {
@@ -96,7 +135,7 @@ Rectangle{
                 context.lineWidth = 1;
                 context.strokeStyle = "green";
                 context.beginPath();
-                for(var j = 0;j <polygonCount;j++){
+                for(var j = 0;j <polygonCount[fileList.fileIndex];j++){
                     for(var i = 0; i<temporary[fileList.fileIndex][j].length;i++){
 //                        context.drawImage(buttonLabel,temporary[fileList.fileIndex][j][i][0],temporary[fileList.fileIndex][j][i][1]);
  //                       console.log(temporary[fileList.fileIndex][j][i][0]);
@@ -107,18 +146,17 @@ Rectangle{
                         }
                     }
                 }
-                console.log(temporary[fileList.fileIndex][polygonCount-1]);
- //               context.fill();
-//                var lastOne = [temporary[fileList.fileIndex][polygonCount-1][temporary[fileList.fileIndex].length -1][0],temporary[fileList.fileIndex][polygonCount-1][temporary[fileList.fileIndex].length -1][1]];
-                var firstOne = [temporary[fileList.fileIndex][polygonCount-1][0][0],temporary[fileList.fileIndex][polygonCount-1][0][1]];
-                if((Math.sqrt(Math.pow(lastX-firstOne[0],2)+Math.pow(lastY-firstOne[1],2)) < 2) && temporary[fileList.fileIndex][polygonCount-1].length >1){
+                if(isPathClosed[polygonCount[fileList.fileIndex]-1] == true){
                     console.log("动态1")
+                    context.moveTo(lastX[fileList.fileIndex],lastY[fileList.fileIndex])
+                    context.lineTo(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]);
+                    temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]]);
                     context.closePath();
-                    polygonCount = polygonCount +1;
+                    polygonCount[fileList.fileIndex] = polygonCount[fileList.fileIndex] +1;
                 }
-                else{
+                else if(lastX[fileList.fileIndex] && lastY[fileList.fileIndex]){
 //                    console.log("动态2");
-                    context.moveTo(lastX,lastY)
+                    context.moveTo(lastX[fileList.fileIndex],lastY[fileList.fileIndex])
                     context.lineTo(positionX,positionY);
                 }
 
@@ -155,18 +193,18 @@ Rectangle{
                     }
                 }
                 onPressed: {
-                    lastX = mapDragArea.mouseX;
-                    lastY = mapDragArea.mouseY;
-                    console.log("polygonCount",polygonCount);
-                    temporary[fileList.fileIndex][polygonCount-1].push([lastX,lastY]);
-                    createListButton(lastX,lastY);
+                    lastX[fileList.fileIndex] = mapDragArea.mouseX;
+                    lastY[fileList.fileIndex] = mapDragArea.mouseY;
+                    console.log("polygonCount[fileList.fileIndex]",polygonCount[fileList.fileIndex]);
+                    temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([lastX[fileList.fileIndex],lastY[fileList.fileIndex]]);
+                    createListButton(lastX[fileList.fileIndex],lastY[fileList.fileIndex]);
                     mainCanvas.requestPaint();
                 }
                 onPositionChanged: {
                     positionX = mapDragArea.mouseX;
                     positionY = mapDragArea.mouseY;
 //                    console.log("当前坐标",mouseX,mouseY)
-                    if(temporary[fileList.fileIndex][polygonCount-1].length){
+                    if(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length){
                         mainCanvas.requestPaint()
                     }
 
@@ -175,7 +213,7 @@ Rectangle{
                 onEntered: {
                     positionX = mapDragArea.mouseX;
                     positionY = mapDragArea.mouseY;
-                    if(temporary[fileList.fileIndex][polygonCount-1].length){
+                    if(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length){
                         mainCanvas.requestPaint()
                     }
                 }

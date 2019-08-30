@@ -8,7 +8,8 @@ Rectangle {
     property var sPressedImage: "image/draw_@2x.png";
     property var sNormalImage: "image/circle_@2x.png";
     property var sHoverImage:"image/default_@2x.png";
-
+    property var nIndex:0;
+    signal release(var nIndex);
     Image{
         id:buttonImage;
         anchors.horizontalCenter: parent.horizontalCenter;
