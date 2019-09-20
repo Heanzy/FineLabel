@@ -47,7 +47,7 @@ void ImageItem::setpoytgons(const QList<QList<QList<int> > > &poytgons){
 void ImageItem::setlabels(const QMap<int, QStringList> labels){
     this->labels = labels;
 }
-void ImageItem::output(const QString &jsonData,const QString &fileUrl,const QString &fileUrl1){
+void ImageItem::output(const QString &jsonData,const QString &fileUrl){
     QFile file(fileUrl.mid(8));
         if(!file.open(QIODevice::ReadWrite)) {
             qDebug() << "File open error";
@@ -56,14 +56,20 @@ void ImageItem::output(const QString &jsonData,const QString &fileUrl,const QStr
         }
      file.write(jsonData.toUtf8());
      qDebug() << "Write to file";
-
-     QFile filer(fileUrl1);
-     if(!filer.open(QIODevice::ReadWrite)) {
-         qDebug() << "Filer open error";
-     } else {
-         qDebug() <<"imager File open !";
-     }
-     QByteArray t = filer.readAll();
-     filer.close();
-     file.write(t);
+     file.close();
 }
+QString ImageItem::output1(const QString &fileUrl1){
+    QFile filer(fileUrl1);
+    if(!filer.open(QIODevice::ReadWrite)) {
+        qDebug() << "Filer open error";
+    } else {
+        qDebug() <<"imager File open !";
+    }
+    QByteArray t = filer.readAll();
+    QString string(t);
+    return string;
+}
+
+//void ImageItem::input(const QString &fileUrl){
+
+//}

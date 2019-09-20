@@ -8,18 +8,17 @@ Rectangle{
     property Component component:null;
     property ImageShowArea imageShowArea:null;
     property FileList fileList:null;
+    property LabelListUI labelListUI;
+
     function buttonControl(nIndex){
         for(var i = 0; i < list.count;i++){
             list.children[i].state = "normal";
             if(i === nIndex)
             {
-//                console.log("选定的是",nIndex);
                 list.children[i].state = "pressed";
                 console.log(list.children[i].state);
             }
-//            console.log("第",i,"个的状态：",list.children[i].state)
         }
-
     }
     function hideButton(nIndex){
         for(var i =0 ; i < fileList.sizeOffileList; i++){
@@ -37,9 +36,20 @@ Rectangle{
             }
         }
     }
-
+    function hideButton2(nIndex){
+        for(var i =0 ; i < fileList.sizeOffileList; i++){
+            for(var j =0;j < labelListUI.buttonList[i].length;j++){
+                if(i == nIndex){
+                    labelListUI.buttonList[i][j].visible = true
+                }
+                else{
+                    labelListUI.buttonList[i][j].visible = false
+                }
+            }
+        }
+    }
     function imageChange(nIndex){
-        imageShowArea.imagePath = fileList.fileList[nIndex];
+ //       imageShowArea.imagePath = fileList.fileList[nIndex];
         fileList.fileIndex = nIndex;
     }
 
@@ -49,11 +59,11 @@ Rectangle{
         }
         var newButton;
         if(list.component.status == Component.Ready){
-            console.log("开始创建按钮对象");
             newButton = list.component.createObject(list,{"textColor":"black","fontsize":16,"x":0,"y":list.count*16,"sText":sText,"width":430,"height":16,"nIndex":list.count});
             newButton.release.connect(list.buttonControl);
             newButton.release.connect(list.imageChange);
             newButton.release.connect(list.hideButton);
+            newButton.release.connect(list.hideButton2);
         }
         list.count++;
     }
@@ -71,7 +81,4 @@ Rectangle{
             list.component = null;
         }
     }
-
-
-
 }

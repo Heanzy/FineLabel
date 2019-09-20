@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: new_Button1;
+    id: new_Button4;
     color: "transparent";
 
     property var sPresseImage: "";
@@ -34,23 +34,23 @@ Rectangle {
 
         acceptedButtons: Qt.LeftButton;
         onPressed: {
-            new_Button1.state = "pressed";
+            new_Button4.state = "pressed";
         }
 
         onReleased: {
           release(nIndex)
-
+          new_Button4.state = "normal"
         }
         onEntered: {
-            if(new_Button1.state === "normal")
+            if(new_Button4.state === "normal")
             {
-                new_Button1.state = "hover"
+                new_Button4.state = "hover"
             }
         }
         onExited:
         {
-            if(new_Button1.state === "hover"){
-                new_Button1.state = "normal";
+            if(new_Button4.state === "hover"){
+                new_Button4.state = "normal";
             }
         }
     }
@@ -58,7 +58,7 @@ Rectangle {
         State{
             name:"normal";
             PropertyChanges {
-                target: new_Button1;
+                target: new_Button4;
                 color:"transparent";
 
             }
@@ -67,14 +67,14 @@ Rectangle {
         State{
             name:"pressed";
             PropertyChanges {
-                target: new_Button1;
+                target: new_Button4;
                 color:"#3a5fcd";
             }
         },
         State{
             name:"hover";
             PropertyChanges {
-                target: new_Button1;
+                target: new_Button4;
                 color:"#3a5fcd";
             }
         }

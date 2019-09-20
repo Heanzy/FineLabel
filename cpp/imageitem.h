@@ -22,7 +22,9 @@ public:
     Q_PROPERTY(QImage image READ getimage WRITE setimage NOTIFY imageChanged)
     Q_PROPERTY(QList<QList<QList<int>>> poytgons READ getpoytgons WRITE setpoytgons NOTIFY poytgonsChanged)
     Q_PROPERTY(QMap<int,QStringList> labels READ getlabels WRITE setlabels NOTIFY labelsChanged)
-    Q_INVOKABLE void output(const QString &jsonData,const QString &fileUrl,const QString &fileUrl1);
+    Q_INVOKABLE void output(const QString &jsonData,const QString &fileUrl);
+//    Q_INVOKABLE QString input(const QString &fileUrl);
+    Q_INVOKABLE QString output1(const QString &fileUrl1);
 public:
     QImage getimage();
     QList<QList<QList<int>>> getpoytgons();

@@ -179,6 +179,17 @@ Rectangle {
         anchors.top:labellist.bottom ;
         anchors.topMargin: 2;
         anchors.right: parent.right;
+        Text {
+            id: hisLabelList;
+            text: imageShowArea.labelString;
+            anchors.fill: parent;
+            anchors.top: parent.top
+//            anchors.verticalCenter: parent.verticalCenter;
+//            verticalAlignment: Text.AlignVCenter;
+            font.family: "PingFang SC";
+            font.pixelSize: 16;
+            color: "#000000";
+        }
     }
     //界面右侧多边形标签栏
     Rectangle{
@@ -226,6 +237,13 @@ Rectangle {
         anchors.top:polygonlabel.bottom ;
         anchors.topMargin: 2;
         anchors.right: parent.right;
+        LabelListUI{
+            id:polygonlist;
+            anchors.fill: parent;
+            anchors.top: parent.top;
+            imageShowArea: imageShowArea;
+            fileList: fileList;
+        }
     }
     //界面右侧文件列表栏
     Rectangle{
@@ -280,6 +298,7 @@ Rectangle {
             anchors.top: parent.top;
             imageShowArea: imageShowArea;
             fileList: fileList;
+            labelListUI: polygonlist;
         }
 
 //        Text {
@@ -684,6 +703,7 @@ Rectangle {
         anchors.bottom: bottombackground.top;
 //        anchors.bottomMargin: 100;
         imageItem:imageShowAreaItem;
+        labelListUI:polygonlist;
         ImageItem{
             id:imageShowAreaItem;
 
@@ -700,8 +720,9 @@ Rectangle {
               console.log("You chose: " + fileDialog.fileUrls)
 //              var imageFile = new String(fileDialog.fileUrls[0]);
               imageShowArea.destroyTemporary();
+              polygonlist.destroyListButton();
               fileList.string2QVector(fileDialog.fileUrls)
-              imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
+//              imageShowArea.imagePath = fileList.fileList[fileList.fileIndex];
               imageShowArea.imagecontrol(1)
               //fileListText.text = fileList.printFileUrls();
               list.destroyListButton();
@@ -709,6 +730,7 @@ Rectangle {
                   list.createListButton(fileList.fileList[i]);
               }
               imageShowArea.initTemporary();
+              polygonlist.init();
               fileDialog.close();
           }
           onRejected: {

@@ -73,7 +73,7 @@ Rectangle {
        id:labelInterfaceCancel;
        width: 78;
        height: 40;
-       sText: "取消"
+       sText: "取消";
        sPressedImage: "image/Cancel box_select@1x.png";
        sNormalImage: "image/Cancel box_select@1x.png";
        sHoverImage: "image/Cancel box_select@1x.png";
@@ -100,6 +100,8 @@ Rectangle {
        onRelease: {
            label1[fileIndex][index].push(inputLabel.text);
            console.log("label",label1[fileIndex][index])
+           mapItemArea.printLabel();
+           mapItemArea.labelListUI.createListButton(inputLabel.text)
            hideWindow()
        }
    }

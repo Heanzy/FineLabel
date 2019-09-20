@@ -8,7 +8,7 @@ Rectangle{
         /*************************************************/
 
         property var nIndex: 0;
-        property var imagePath: "";
+        property var imagePath:[];
 //        property var canvaslastX[fileList.fileIndex];
 //        property var canvaslastY[fileList.fileIndex];
 //        property var currentX;
@@ -30,7 +30,21 @@ Rectangle{
         property var image:[];
         property var isOpted:[];
         property var currentClipCount:[];
+        property var labelSpace:[]
+        property var labelString;
+        property var copytemporary:[]
+        property var copyllabel:[]
+        property LabelListUI labelListUI:null
+
 //        property Component component:null;
+        function copy(){
+            copytemporary = temporary.slice();
+ //           copyllabel = label.slice();
+        }
+        function rePaint(){
+            mainCanvas.requestPaint();
+        }
+
         function imagecontrol(nIndex){
             if(nIndex == 1){
                 mainCanvas.visible = true;
@@ -66,6 +80,13 @@ Rectangle{
                     label[i][j] =[];
 //                    imageItem.poytgons[i][j].append({});
                 }
+                if(fileList.fileList[i].indexOf(".json") != -1){
+                    parseJson(imageItem.output1(fileList.fileList[i]),i)
+                }
+                else{
+                    imagePath[i] =fileList.fileList[i];
+                    console.log(imagePath[i]);
+                }
             }
         }
         function destroyTemporary(){
@@ -82,17 +103,17 @@ Rectangle{
 
         }
 
-        function createListButton(x,y){
+        function createListButton(x,y,index){
             if(mainCanvas.component == null){
                 mainCanvas.component = Qt.createComponent("New_Button2.qml");
             }
             var newButton;
             if(mainCanvas.component.status == Component.Ready){
                 console.log("开始创建按钮对象for imageshowarea");
-                newButton = mainCanvas.component.createObject(mainCanvas,{"x":x-1,"y":y-1,"width":2,"height":2,"nIndex":polygonCount[fileList.fileIndex]-1});
-                buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push(newButton);
-                if(buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length == 1){
-                    buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0].release.connect(closePath);
+                newButton = mainCanvas.component.createObject(mainCanvas,{"x":x-1,"y":y-1,"width":2,"height":2,"nIndex":polygonCount[index]-1});
+                buttonList[index][polygonCount[index]-1].push(newButton);
+                if(buttonList[index][polygonCount[index]-1].length == 1){
+                    buttonList[index][polygonCount[index]-1][0].release.connect(closePath);
                 }
             }
         }
@@ -109,8 +130,11 @@ Rectangle{
                 polygon.points = temporary[fileList.fileIndex][i]
                 image.push(polygon)
             }
+            var imageTemp = new Object();
+            imageTemp.picture =fileList.fileList[fileList.fileIndex];
+            image.push(imageTemp);
             console.log(JSON.stringify(image,null,4));
-            imageItem.output(JSON.stringify(image,null,4),fileUrl,fileList.fileList[fileList.fileIndex]);
+            imageItem.output(JSON.stringify(image,null,4),fileUrl);
 //            imageItem.setimagetest(fileList.fileList[fileList.fileIndex]);
         }
         function createAnchor(){
@@ -125,7 +149,33 @@ Rectangle{
 //            }
             clipCanvas.requestPaint();
         }
+        function parseJson(jsonData,index){
+            var jsonObject = JSON.parse(jsonData);
+            for(var i = 0;i < jsonObject.length -1; i++){
+                var object = jsonObject[i];
+                label[index][i] = object.label;
+                temporary[index][i] = object.points;
+                for(var j = 0;j < temporary[index][i].length; j++){
+                    createListButton(temporary[index][i][j][0],temporary[index][i][j][1],index);
+                }
+                polygonCount[index]++;
+                isPathClosed[index][i] = true;
+                console.log(object.label);
+            }
+            imagePath[index] = jsonObject[jsonObject.length -1].picture;
+            console.log("imagePath",imagePath[index])
+        }
 
+        function printLabel(){
+            var labelStringtemp = "";
+            for(var i = 0;i < label.length;i++){
+                for(var j = 0;j < polygonCount[i];j++){
+                    labelStringtemp = labelStringtemp + label[i][j] + "\n";
+                }
+            }
+            console.log("labelString:",labelStringtemp)
+            labelString = labelStringtemp
+        }
         LabelWindow{
             id:labelWindow;
             width:450;
@@ -139,7 +189,7 @@ Rectangle{
             id: mapImg
 
             visible: false
-            source: "image://colors/"+imagePath
+            source: "image://colors/"+imagePath[fileList.fileIndex]
             //asynchronous: true
         }
         Image{
@@ -245,7 +295,7 @@ Rectangle{
                         lastY[fileList.fileIndex] = mapDragArea.mouseY;
     //                    console.log("polygonCount[fileList.fileIndex]",polygonCount[fileList.fileIndex]);
                         temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([lastX[fileList.fileIndex],lastY[fileList.fileIndex]]);
-                        createListButton(lastX[fileList.fileIndex],lastY[fileList.fileIndex]);
+                        createListButton(lastX[fileList.fileIndex],lastY[fileList.fileIndex],fileList.fileIndex);
                         mainCanvas.requestPaint();
                     }
                 }
