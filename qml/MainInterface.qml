@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.0
 import he.qt.FileList 1.0
+import QtQuick.Window 2.0
 import he.qt.ImageItem 1.0
 Rectangle {
     id: mainInterface;
@@ -758,8 +759,8 @@ Rectangle {
     MouseArea
     {
         id:menuAllMouseArea;
-        visible: false;
-        z:-1
+        visible: true;
+        z:-1;
 
         width: mainwindow.width;
         height: mainwindow.height;
@@ -769,8 +770,6 @@ Rectangle {
             fileButton_list.visible=false;
             helpbutton_list.visible=false;
             console.log("visible");
-            menuAllMouseArea.visible = false;
-            console.log("set success");
 
         }
 
