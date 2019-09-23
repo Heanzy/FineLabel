@@ -703,7 +703,7 @@ Rectangle {
         anchors.bottom: bottombackground.top;
 //        anchors.bottomMargin: 100;
         imageItem:imageShowAreaItem;
-        labelListUI:polygonlist;
+      //  labelListUI:polygonlist;
         ImageItem{
             id:imageShowAreaItem;
 

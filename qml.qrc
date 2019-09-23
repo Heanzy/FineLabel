@@ -13,7 +13,7 @@
         <file>qml/New_Button3.qml</file>
         <file>qml/LabelWindow.qml</file>
         <file>qml/Menu_button_top.qml</file>
-        <file>qml/Nwq_Button4.qml</file>
+        <file>qml/New_Button_polygonlabel.qml</file>
         <file>qml/LabelListUI.qml</file>
     </qresource>
 </RCC>

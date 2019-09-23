@@ -33,12 +33,11 @@ Rectangle{
         property var labelSpace:[]
         property var labelString;
         property var copytemporary:[]
-        property var copyllabel:[]
-        property LabelListUI labelListUI:null
-
-//        property Component component:null;
+        property var copyllabel:[]        
+        property Component component:null;
         function copy(){
             copytemporary = temporary.slice();
+            console.log(copytemporary[fileList.fileIndex][0])
  //           copyllabel = label.slice();
         }
         function rePaint(){
@@ -64,6 +63,7 @@ Rectangle{
         function initTemporary(){
             for(var i =0 ; i < fileList.sizeOffileList; i++){
                 temporary[i] = [];
+                copytemporary[i] = []
                 buttonList[i] = [];
                 polygonCount[i] = 1;
                 isPathClosed[i] = [];
@@ -75,6 +75,7 @@ Rectangle{
                 lastY = [];
                 for(var j =0;j < 20;j++){
                     temporary[i][j]=[];
+                    copytemporary[i][j]=[];
                     buttonList[i][j]=[];
                     isPathClosed[i][j] = false;
                     label[i][j] =[];
@@ -127,7 +128,7 @@ Rectangle{
             for(var i = 0;i<polygonCount[fileList.fileIndex]-1;i++){
                 var polygon = new Object();
                 polygon.label = label[fileList.fileIndex][i]
-                polygon.points = temporary[fileList.fileIndex][i]
+                polygon.points = copytemporary[fileList.fileIndex][i]
                 image.push(polygon)
             }
             var imageTemp = new Object();
@@ -155,6 +156,7 @@ Rectangle{
                 var object = jsonObject[i];
                 label[index][i] = object.label;
                 temporary[index][i] = object.points;
+                copytemporary[index][i] = object.points;
                 for(var j = 0;j < temporary[index][i].length; j++){
                     createListButton(temporary[index][i][j][0],temporary[index][i][j][1],index);
                 }
@@ -213,13 +215,14 @@ Rectangle{
             property Component component:null;
             Keys.onEscapePressed: {
                 temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1] = [];
+                copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1] = [];
                 for (var i in buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1]){
                     buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][i].destroy();
                 }
                 buttonList[fileList.fileIndex][polygonCount[fileList.fileIndex]-1]= [];
                 lastX[fileList.fileIndex] = null;
                 lastY[fileList.fileIndex] = null;
-                console.log("temporary",temporary[fileList.fileIndex]);
+          //      console.log("temporary",temporary[fileList.fileIndex]);
                 mainCanvas.requestPaint();
 
             }
@@ -241,8 +244,8 @@ Rectangle{
                     }
                 }
                 if(isPathClosed[fileList.fileIndex][polygonCount[fileList.fileIndex]-1] == true){
-                    console.log("fileList.fileIndex",fileList.fileIndex)
-                    console.log("动态1")
+//                    console.log("fileList.fileIndex",fileList.fileIndex)
+//                    console.log("动态1")
                     context.moveTo(lastX[fileList.fileIndex],lastY[fileList.fileIndex])
                     context.lineTo(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]);
                     temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]]);
@@ -295,6 +298,7 @@ Rectangle{
                         lastY[fileList.fileIndex] = mapDragArea.mouseY;
     //                    console.log("polygonCount[fileList.fileIndex]",polygonCount[fileList.fileIndex]);
                         temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([lastX[fileList.fileIndex],lastY[fileList.fileIndex]]);
+                        copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([lastX[fileList.fileIndex],lastY[fileList.fileIndex]]);
                         createListButton(lastX[fileList.fileIndex],lastY[fileList.fileIndex],fileList.fileIndex);
                         mainCanvas.requestPaint();
                     }
@@ -303,7 +307,7 @@ Rectangle{
                     positionX = mapDragArea.mouseX;
                     positionY = mapDragArea.mouseY;
                     //console.log("当前坐标",mouseX,mouseY)
-                    if(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length){
+                    if(copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].length){
                         mainCanvas.requestPaint()
                     }
 
@@ -335,10 +339,10 @@ Rectangle{
                 context.beginPath();
                 context.clearRect(0,0,width,height);
                 console.log("裁切",currentClipCount[fileList.fileIndex]);
-                console.log(temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]].length);
-                context.moveTo(temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][0][0],temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][0][1]);
-                for(var i = 1;i <temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]].length;i++){
-                        context.lineTo(temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][i][0],temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][i][1]);
+            //    console.log(temporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]].length);
+                context.moveTo(copytemporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][0][0],copytemporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][0][1]);
+                for(var i = 1;i <copytemporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]].length;i++){
+                        context.lineTo(copytemporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][i][0],copytemporary[fileList.fileIndex][currentClipCount[fileList.fileIndex]][i][1]);
                 }
                 context.closePath();
                 context.clip();

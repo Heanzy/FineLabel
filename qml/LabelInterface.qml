@@ -99,9 +99,9 @@ Rectangle {
        anchors.topMargin: 6;
        onRelease: {
            label1[fileIndex][index].push(inputLabel.text);
-           console.log("label",label1[fileIndex][index])
            mapItemArea.printLabel();
-           mapItemArea.labelListUI.createListButton(inputLabel.text)
+           polygonlist.createListButton(inputLabel.text);
+           polygonlist.isButtonHide[fileIndex].push(false)
            hideWindow()
        }
    }
