@@ -9,7 +9,10 @@ Rectangle{
     property ImageShowArea imageShowArea:null;
     property FileList fileList:null;
     property var buttonList:[];
-    property var isButtonHide:[]
+    property var isButtonHide:[];
+
+    property var selectedlabel;
+
     function init(){
         for(var i = 0 ;i < fileList.sizeOffileList ; i++){
             buttonList[i] = [];
@@ -31,10 +34,10 @@ Rectangle{
         }
         else{
             isButtonHide[fileList.fileIndex][nIndex] = false;
-    //        console.log(imageShowArea.copytemporary[fileList.fileIndex][nIndex])
+            console.log(imageShowArea.copytemporary[fileList.fileIndex][nIndex])
             imageShowArea.temporary[fileList.fileIndex][nIndex] = imageShowArea.copytemporary[fileList.fileIndex][nIndex];
             console.log("显示标签列表")
-            for(var j =0;j < imageShowArea.buttonList[fileList.fileIndex][nIndex].length;i++){
+            for(var j =0;j < imageShowArea.buttonList[fileList.fileIndex][nIndex].length;j++){
                 imageShowArea.buttonList[fileList.fileIndex][nIndex][j].visible = true;
             }
             imageShowArea.rePaint();
@@ -49,6 +52,7 @@ Rectangle{
             console.log("开始创建按钮对象");
             newButton = fucklist.component.createObject(fucklist,{"textColor":"black","fontsize":16,"x":0,"y":fucklist.count[fileList.fileIndex]*16,"sText":sText,"width":430,"height":16,"nIndex":fucklist.count[fileList.fileIndex]});
             newButton.release.connect(fucklist.hideButton1);
+            newButton.release.connect(fucklist.selectedLabel);
         }
         buttonList[fileList.fileIndex].push(newButton);
         fucklist.count[fileList.fileIndex]++;
@@ -64,5 +68,11 @@ Rectangle{
             fucklist.component = null;
         }
     }
-
+    function selectedLabel(nIndex){
+        imageShowArea.selectedLabel = nIndex;
+        selectedlabel = nIndex;
+    }
+    function deleteLabelButton(){
+        buttonList[fileList.fileIndex][selectedlabel].destroy();
+    }
 }

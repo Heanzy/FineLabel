@@ -538,6 +538,10 @@ Rectangle {
             sPressedImage:"image/delete1_@1x.png";
             sHoverImage:"image/delete1_@1x.png";
             sText: "删除"
+            onRelease: {
+                imageShowArea.deletePolygon();
+                polygonlist.deleteLabelButton();
+            }
         }
 
     }

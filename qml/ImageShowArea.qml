@@ -35,6 +35,7 @@ Rectangle{
         property var copytemporary:[]
         property var copyllabel:[]        
         property Component component:null;
+        property var selectedLabel;
         function copy(){
             copytemporary = temporary.slice();
             console.log(copytemporary[fileList.fileIndex][0])
@@ -178,6 +179,17 @@ Rectangle{
             console.log("labelString:",labelStringtemp)
             labelString = labelStringtemp
         }
+        function deletePolygon(){
+            console.log("删除标签")
+            temporary[fileList.fileIndex][selectedLabel] = [];
+            copytemporary[fileList.fileIndex][selectedLabel] = [];
+            label[fileList.fileIndex][selectedLabel] = [];
+            for(var i =0;i < buttonList[fileList.fileIndex][selectedLabel].length; i++){
+                buttonList[fileList.fileIndex][selectedLabel][i].destroy();
+            }
+            rePaint();
+        }
+
         LabelWindow{
             id:labelWindow;
             width:450;
@@ -249,6 +261,7 @@ Rectangle{
                     context.moveTo(lastX[fileList.fileIndex],lastY[fileList.fileIndex])
                     context.lineTo(temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]);
                     temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],temporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]]);
+                    copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1].push([copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][0],copytemporary[fileList.fileIndex][polygonCount[fileList.fileIndex]-1][0][1]]);
                     context.closePath();
                     polygonCount[fileList.fileIndex] = polygonCount[fileList.fileIndex] +1;
                     lastX[fileList.fileIndex] = null
@@ -329,7 +342,7 @@ Rectangle{
             //这里使画布居中显示
             x: 0;
             y: 0;
-            visible: true;
+            visible: false;
             contextType: "2d"
             focus: true;
             onPaint: {

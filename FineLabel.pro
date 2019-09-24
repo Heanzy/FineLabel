@@ -17,7 +17,8 @@ SOURCES +=  \
     cpp/colorimageprovider.cpp \
     cpp/imagehandler.cpp \
     cpp/filelist.cpp \
-    cpp/imageitem.cpp
+    cpp/imageitem.cpp \
+    cpp/mlknn.cpp
 
 RESOURCES += qml.qrc \
     image.qrc
@@ -36,5 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS +=  \
     cpp/imagehandler.h \
     cpp/filelist.h \
-    cpp/imageitem.h
+    cpp/imageitem.h \
+    cpp/mlknn.h
 
