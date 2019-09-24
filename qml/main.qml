@@ -23,9 +23,10 @@ Window{
 //    }
     MainInterface{
                 id: mainInterface;
-                width:mainwindow.width;
-                height:1080
-                visible: true;
+                anchors.fill: parent
+//                width:mainwindow.width;
+//                height:1080
+//                visible: true;
             }
 //    ScrollView{
 //        id:scroll;

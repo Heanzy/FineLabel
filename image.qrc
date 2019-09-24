@@ -125,5 +125,8 @@
         <file>qml/image/line_@2x.png</file>
         <file>qml/image/search bar_@1x.png</file>
         <file>qml/image/search bar_@2x.png</file>
+        <file>qml/image/close2_@1x.png</file>
+        <file>qml/image/maximize2_@1x.png</file>
+        <file>qml/image/minimize2_@1x.png</file>
     </qresource>
 </RCC>

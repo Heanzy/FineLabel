@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.0
 import he.qt.FileList 1.0
+import QtQuick.Window 2.0
 import he.qt.ImageItem 1.0
 Rectangle {
     id: mainInterface;
@@ -110,7 +111,6 @@ Rectangle {
         width: 1920;
         height: 40;
         anchors.top: topbackground.bottom;
-
     }
     //界面左部黑背景色
     Image {
@@ -318,6 +318,8 @@ Rectangle {
             anchors.fill: parent
         }
     }
+
+//左侧功能按键
     Column{
         id: functionalButtonList;
         anchors.top: topbackground2.bottom;
@@ -545,6 +547,7 @@ Rectangle {
         }
 
     }
+//左上角“文件”按键
     New_Button{
         id: fileButton;
         height: 40;
@@ -556,20 +559,18 @@ Rectangle {
         //anchors.verticalCenter: topbackground2.verticalCenter;
         //anchors.horizontalCenter: parent.horizontalCenter;
         sText: "文件"
-        onRelease: fileButton_list.visible=true
+        onRelease: {
+            if(fileButton_list.visible===true){
+                fileButton_list.visible=false;
+            }else{
+                fileButton_list.visible=true;
+            }
+            if(helpbutton_list.visible===true){
+                helpbutton_list.visible=false;
+            }
+        }
     }
-
-//    New_Button{
-//        id: helpButton;
-//        height: 40;
-//        width: 50;
-//        anchors.left: fileButton.right;
-//        anchors.top: topbackground.bottom;
-//        anchors.topMargin: 5;
-//        anchors.leftMargin: 30;
-//        anchors.verticalCenter: parent.verticalCenter;
-//        sText: "帮助"
-//    }
+//“文件”按键下拉菜单
     Rectangle
     {
         id: fileButton_list;
@@ -632,7 +633,7 @@ Rectangle {
             }
         }
     }
-
+//左上角“帮助”按键
     New_Button{
 
         id: helpButton;
@@ -641,9 +642,18 @@ Rectangle {
         anchors.left: fileButton.right;
         anchors.top: topbackground2.top;
         sText: "帮助"
-        onRelease: helpbutton_list.visible=true
+        onRelease:{
+            if(helpbutton_list.visible===true){
+                helpbutton_list.visible=false;
+            }else{
+                helpbutton_list.visible=true
+            }
+            if(fileButton_list.visible===true){
+                fileButton_list.visible=false;
+            }
+        }
     }
-
+//“帮助”按键下拉菜单
     Rectangle
     {
         id: helpbutton_list;
@@ -691,7 +701,7 @@ Rectangle {
         }
     }
 
-    //图片显示区域
+//图片显示区域
     ImageShowArea{
         id:imageShowArea;
         width: 1220
@@ -713,7 +723,7 @@ Rectangle {
 
         }
     }
-    //图片文件选择窗口
+//图片文件选择窗口
     FileDialog {
           id: fileDialog
           title: "Please choose a file"
@@ -742,6 +752,7 @@ Rectangle {
               fileDialog.close();
           }
       }
+//“保存”文件选择窗口
     FileDialog{
         id:saveFileDialog
         title: "Please choose a file"
@@ -758,12 +769,12 @@ Rectangle {
             saveFileDialog.close();
         }
     }
-
+//全局按键相应区
     MouseArea
     {
         id:menuAllMouseArea;
-        visible: false;
-        z:-1
+        visible: true;
+        z:-1;
 
         width: mainwindow.width;
         height: mainwindow.height;
@@ -773,8 +784,6 @@ Rectangle {
             fileButton_list.visible=false;
             helpbutton_list.visible=false;
             console.log("visible");
-            menuAllMouseArea.visible = false;
-            console.log("set success");
 
         }
 
