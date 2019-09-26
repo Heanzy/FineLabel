@@ -369,6 +369,9 @@ Rectangle {
             sPressedImage:"image/Import1_@1x.png";
             sHoverImage:"image/Import1_@1x.png";
             sText: "导入标签库"
+            onRelease: {
+                txtfileDialog.open();
+            }
         }
 
         ButtonTool{
@@ -379,6 +382,9 @@ Rectangle {
             sPressedImage:"image/export1_@1x.png";
             sHoverImage:"image/export1_@1x.png";
             sText: "导出标签库"
+            onRelease: {
+                txtsaveFileDialog.open();
+            }
         }
 
         ButtonTool{
@@ -728,7 +734,7 @@ Rectangle {
           id: fileDialog
           title: "Please choose a file"
           folder: shortcuts.home
-          nameFilters: [ "Image Files (*.jpg *.png *.gif *.bmp *.ico *.json)", "*.*"]
+          nameFilters: [ "Image Files (*.jpg *.png *.gif *.bmp *.ico *.json )", "*.*"]
           selectMultiple: true;
           onAccepted: {
               console.log("You chose: " + fileDialog.fileUrls)
@@ -767,6 +773,41 @@ Rectangle {
         onRejected: {
             console.log("Canceled")
             saveFileDialog.close();
+        }
+    }
+
+    FileDialog {
+          id: txtfileDialog
+          title: "Please choose a file"
+          folder: shortcuts.home
+          nameFilters: [ "Txt Files (*.txt )", "*.*"]
+          selectMultiple: true;
+          onAccepted: {
+              console.log("You chose txt: " + txtfileDialog.fileUrls)
+              var filePath = new String(txtfileDialog.fileUrls)
+              imageShowArea.getLabel(filePath.slice(8))
+              txtfileDialog.close()
+          }
+          onRejected: {
+              console.log("Canceled")
+              txtfileDialog.close();
+          }
+      }
+
+    FileDialog{
+        id:txtsaveFileDialog
+        title: "Please choose a file"
+        folder: shortcuts.home;
+        selectExisting: false;
+        nameFilters: ["Txt Files(*.txt)","*.*"]
+        onAccepted: {
+            console.log("You chose: " + txtsaveFileDialog.fileUrl)
+            imageShowArea.outLabel(txtsaveFileDialog.fileUrl);
+            txtsaveFileDialog.close();
+        }
+        onRejected: {
+            console.log("Canceled")
+            txtsaveFileDialog.close();
         }
     }
 //全局按键相应区

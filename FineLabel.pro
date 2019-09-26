@@ -18,11 +18,14 @@ SOURCES +=  \
     cpp/imagehandler.cpp \
     cpp/filelist.cpp \
     cpp/imageitem.cpp \
-    cpp/mlknn.cpp
+    cpp/mlknn.cpp \
+    cpp/VGG16_bridge.cpp
 
 RESOURCES += qml.qrc \
     image.qrc
 
+INCLUDEPATH += C:\Users\sjxy\opencv_made\build\include
+LIBS += C:\Users\sjxy\opencv_made\install\bin\libopencv_*.dll
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -38,5 +41,6 @@ HEADERS +=  \
     cpp/imagehandler.h \
     cpp/filelist.h \
     cpp/imageitem.h \
-    cpp/mlknn.h
+    cpp/mlknn.h \
+    cpp/VGG16_bridge.h
 

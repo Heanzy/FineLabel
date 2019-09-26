@@ -179,6 +179,13 @@ Rectangle{
             console.log("labelString:",labelStringtemp)
             labelString = labelStringtemp
         }
+        function getLabel(fileUrl){
+            labelString += imageItem.output1(fileUrl)
+        }
+        function outLabel(fileUrl){
+            imageItem.output(labelString,fileUrl)
+        }
+
         function deletePolygon(){
             console.log("删除标签")
             temporary[fileList.fileIndex][selectedLabel] = [];
